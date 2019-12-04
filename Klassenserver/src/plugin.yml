@@ -1,0 +1,15 @@
+name: Klassenserver
+version: 1.0.0
+description: Das Jump and Run Plugin fuer den Klassenserver
+
+author: Marcel Teders
+website: https://marcel-teders.de
+
+main: me.marcel.klassenserver.Main
+api-version: 1.14
+
+commands:
+  klassenserver:
+    description: Main command
+    aliases: [ks]
+    permission: klassenserver.admin
