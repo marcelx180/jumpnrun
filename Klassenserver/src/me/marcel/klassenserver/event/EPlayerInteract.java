@@ -1,5 +1,6 @@
 package me.marcel.klassenserver.event;
 
+import org.bukkit.Bukkit;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,6 +30,8 @@ public class EPlayerInteract implements Listener {
 							Route route = RouteManager.getRouteByName(routeName);
 							
 							player.teleport(route.getStart());
+							
+							Bukkit.getPluginManager().callEvent(new RouteJoinEvent(player, route));
 						}
 					}
 				}
