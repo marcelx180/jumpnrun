@@ -33,13 +33,7 @@ public class ConfigEditor {
 	}
 	
 	public boolean delete() {
-		boolean success = true;
-		
-		if (this.getFile().exists()) {
-			this.getFile().deleteOnExit();
-		}
-		
-		return success;
+		return this.getFile().delete();
 	}
 	
 	public boolean update(String path, Object value) {
