@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -74,13 +76,30 @@ public class ConfigEditor {
 	public List<String> getStringList(String path) {
 		return this.getConfig().getStringList(path);
 	}
-	
+	public Location getLocation(String path) {
+		String world = ConfigManager.editor("routes").getString(path+".world");
+		double x = ConfigManager.editor("routes").getDouble(path+".x");
+		double y = ConfigManager.editor("routes").getDouble(path+".y");
+		double z = ConfigManager.editor("routes").getDouble(path+".z");
+		float pitch = (float) ConfigManager.editor("routes").getDouble(path+".pitch");
+		float yaw = (float) ConfigManager.editor("routes").getDouble(path+".yaw");
+		return new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+	}
 	public File getFile() {
 		return this.file;
 	}
 	
 	public FileConfiguration getConfig() {
 		return this.config;
+	}
+
+	@SuppressWarnings("null")
+	public List<Location> getCheckpoints(String path) {
+		List<Location> checkpoints = null;
+		for(String checkpoint : this.getConfig().getStringList(path)){
+			checkpoints.add(ConfigManager.editor("routes").getLocation(path+"."+checkpoint));
+		}
+		return checkpoints;
 	}
 	
 }

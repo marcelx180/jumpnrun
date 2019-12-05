@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import me.marcel.klassenserver.config.ConfigManager;
@@ -42,19 +40,13 @@ public class RouteManager {
 		for (String route : ConfigManager.editor("routes").getStringList("routes")) {
 			if (!(ConfigManager.editor("routes").getString(route + ".world") == null)) {
 				
-				String world = ConfigManager.editor("routes").getString(route + ".start.world");
-				double x = ConfigManager.editor("routes").getDouble(route + ".start.x");
-				double y = ConfigManager.editor("routes").getDouble(route + ".start.y");
-				double z = ConfigManager.editor("routes").getDouble(route + ".start.z");
-				float pitch = (float) ConfigManager.editor("routes").getDouble(route + ".start.pitch");
-				float yaw = (float) ConfigManager.editor("routes").getDouble(route + ".start.yaw");
+				List<Location> checkpoints = ConfigManager.editor("routes").getCheckpoints(route+".checkpoints"); 
+				Location start = ConfigManager.editor("routes").getLocation(route + "start");
 				
-				Location start = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-				
-				new Route(route, start);
+				new Route(route, start, checkpoints);
 				
 			} else {
-				// Location nicht vollständig
+				// Location nicht vollstï¿½ndig
 			}
 		}
 	}
