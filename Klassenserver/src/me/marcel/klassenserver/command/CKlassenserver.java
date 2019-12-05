@@ -19,19 +19,19 @@ public class CKlassenserver implements CommandExecutor {
 			Player player = (Player) sender;
 			
 			if (args.length == 0) {
-				player.sendMessage("§8[§aKlassenserver§8] §6/ks create <name>");
-				player.sendMessage("§8[§aKlassenserver§8] §6/ks delete <name>");
-				player.sendMessage("§8[§aKlassenserver§8] §6/ks start <name>");
+				player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§6/ks create <name>");
+				player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§6/ks delete <name>");
+				player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§6/ks start <name>");
 			} else if (args.length == 1) {
 				
 				// /ks create (name is missing)
 				if (args[0].equalsIgnoreCase("create")) {
-					player.sendMessage("§8[§aKlassenserver§8] §cFehlender Name!");
+					player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cFehlender Name!");
 				}
 				
 				// /ks delete (name is missing)
 				if (args[0].equalsIgnoreCase("delete")) {
-					player.sendMessage("§8[§aKlassenserver§8] §cFehlender Name!");
+					player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cFehlender Name!");
 				}
 				
 			} else if (args.length == 2) {
@@ -46,10 +46,10 @@ public class CKlassenserver implements CommandExecutor {
 						
 						ConfigManager.editor("routes").update("routes", routes);
 						
-						player.sendMessage("§8[§aKlassenserver§8] §bDas JumpNRun wurde erstellt!");
-						player.sendMessage("§8[§aKlassenserver§8] §bBitte Startlocation festlegen: /ks start <name>");
+						player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§bDas JumpNRun wurde erstellt!");
+						player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§bBitte Startlocation festlegen: /ks start" + name);
 					} else {
-						player.sendMessage("§8[§aKlassenserver§8] §cExistiert bereits!");
+						player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cExistiert bereits!");
 					}
 				}
 				
@@ -74,17 +74,17 @@ public class CKlassenserver implements CommandExecutor {
 						ConfigManager.editor("routes").update(name + ".start.yaw", yaw);
 						ConfigManager.editor("routes").update(name + ".start.pitch", pitch);
 						
-						player.sendMessage("§8[§aKlassenserver§8] §bDie Startlocation wurde gesetzt!");
+						player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§bDie Startlocation wurde gesetzt!");
 					} else {
-						player.sendMessage("§8[§aKlassenserver§8] §cExistiert nicht!");
+						player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cExistiert nicht!");
 					}
 				}
 				
 			} else {
-				player.sendMessage("§8[§aKlassenserver§8] §cFalsche Syntax!");
+				player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cFalsche Syntax!");
 			}
 		} else {
-			sender.sendMessage("§8[§aKlassenserver§8] §cDer Befehl kann nur von Spielern genutzt werden!");
+			sender.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cDer Befehl kann nur von Spielern genutzt werden!");
 		}
 		
 		return true;
