@@ -34,9 +34,14 @@ public class ConfigEditor {
 	
 	public boolean delete() {
 		boolean success = true;
-		
-		if (this.getFile().exists()) {
-			this.getFile().deleteOnExit();
+		try
+		{
+			if (this.getFile().exists()) 
+			{
+				this.getFile().deleteOnExit();
+			}
+		} catch (IOException e) {
+			success = false;
 		}
 		
 		return success;
