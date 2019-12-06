@@ -38,7 +38,7 @@ public class RouteManager {
 	
 	public static void loadRoutes() {
 		for (String route : ConfigManager.editor("routes").getStringList("routes")) {
-			if (!(ConfigManager.editor("routes").getString(route + ".world") == null)) {
+			if (!(ConfigManager.editor("routes").getString(route + ".start.world") == null)) {
 				
 				List<Location> checkpoints = ConfigManager.editor("routes").getCheckpoints(route+".checkpoints"); 
 				Location start = ConfigManager.editor("routes").getLocation(route + ".start");
@@ -46,7 +46,7 @@ public class RouteManager {
 				new Route(route, start, checkpoints);
 				
 			} else {
-				// Location nicht vollst�ndig
+				// Location nicht vollständig
 			}
 		}
 	}
