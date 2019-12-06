@@ -95,7 +95,7 @@ public class ConfigEditor {
 
 	@SuppressWarnings("null")
 	public List<Location> getCheckpoints(String path) {
-		List<Location> checkpoints = new ArrayList();
+		List<Location> checkpoints = new ArrayList<Location>();
 		for(String checkpoint : this.getConfig().getStringList(path)){
 			checkpoints.add(ConfigManager.editor("routes").getLocation(path+"."+checkpoint));
 		}
