@@ -62,8 +62,8 @@ public class EPlayerInteract implements Listener {
 						stopMeta.setDisplayName("§l§4Stop");
 						stopMeta.setLocalizedName("Stop");
 						List<String> stopLore = new ArrayList<String>();
-						stopLore.set(0, "Rechts-klicke dieses Item");
-						stopLore.set(1,"um das Jump'n Run zu stoppen");
+						stopLore.add("Rechts-klicke dieses Item");
+						stopLore.add("um das Jump'n Run zu stoppen");
 						stopMeta.setLore(stopLore);
 						stop.setItemMeta(stopMeta);
 						inv.setItem(8, stop);
@@ -72,8 +72,8 @@ public class EPlayerInteract implements Listener {
 						checkpointMeta.setDisplayName("§l§6Zurück zum letzen Checkpoint");
 						checkpointMeta.setLocalizedName("Checkpoint");
 						List<String> checkpointLore = new ArrayList<String>();
-						checkpointLore.set(0,"Rechts-klicke dieses Item");
-						checkpointLore.set(1,"um zum letzen Checkpoint zu gelangen");
+						checkpointLore.add("Rechts-klicke dieses Item");
+						checkpointLore.add("um zum letzen Checkpoint zu gelangen");
 						checkpointMeta.setLore(checkpointLore);
 						backToCheckpoint.setItemMeta(checkpointMeta);
 						inv.setItem(0, backToCheckpoint);
