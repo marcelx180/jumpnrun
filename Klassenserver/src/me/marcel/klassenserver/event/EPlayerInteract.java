@@ -90,32 +90,32 @@ public class EPlayerInteract implements Listener {
 					}
 				}
 			}
-			boolean eventItem=true;
-			Material item = Material.AIR;
-			try{
-				item = event.getItem().getType();
-			}catch(Exception ex){
-				eventItem=false;
-			}
-			if(eventItem){
-				if(PlayerPlayingManager.exists(player.getUniqueId())) {			
-					if(item == Material.REDSTONE ){
+		}
+		boolean eventItem=true;
+		Material item = Material.AIR;
+		try{
+			item = event.getItem().getType();
+		}catch(Exception ex){
+			eventItem=false;
+		}
+		if(eventItem){
+			if(PlayerPlayingManager.exists(player.getUniqueId())) {			
+				if(item == Material.REDSTONE ){
 						
-						player.getInventory().clear();
-						Inventory inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
-						player.getInventory().setContents(inv.getContents());
-						Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
-						player.teleport(signClickedLocation);
-						PlayerPlayingManager.remove(player.getUniqueId());
-						player.updateInventory(); 
-						player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run verlassen");
-						event.setCancelled(true);
-					} if(item == Material.BLAZE_ROD){
+					player.getInventory().clear();
+					Inventory inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
+					player.getInventory().setContents(inv.getContents());
+					Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
+					player.teleport(signClickedLocation);
+					PlayerPlayingManager.remove(player.getUniqueId());
+					player.updateInventory(); 
+					player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run verlassen");
+					event.setCancelled(true);
+				} if(item == Material.BLAZE_ROD){
 						
-						Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
-						player.teleport(lastCheckpoint);
-						event.setCancelled(true);
-						}
+					Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
+					player.teleport(lastCheckpoint);
+					event.setCancelled(true);
 					}
 				}
 			}
