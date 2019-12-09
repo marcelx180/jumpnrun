@@ -37,7 +37,8 @@ public class EPlayerInteract implements Listener {
 				}catch(Exception ex){
 					
 				} 
-					if(lore.toArray().length > 0 && lore.get(0).equalsIgnoreCase("§b[§5Klassenserver§b]") && lore.get(1).equalsIgnoreCase("Klicke hiermit auf ein Schild") && lore.get(2).equalsIgnoreCase("und es wird zum Start Schild für das Jump'n Run:")) {				
+				if(lore.toArray().length > 0 ){
+					if(lore.get(0).equalsIgnoreCase("§b[§5Klassenserver§b]") && lore.get(1).equalsIgnoreCase("Klicke hiermit auf ein Schild") && lore.get(2).equalsIgnoreCase("und es wird zum Start Schild für das Jump'n Run:")) {				
 						
 						String name = lore.get(3);
 						sign.setLine(0, "§b[§5Klassenserver§b]");
@@ -45,9 +46,9 @@ public class EPlayerInteract implements Listener {
 						sign.setLine(2, name);
 						sign.setLine(3, "Klicke zum spielen");
 						
-						sign.update();
-						
+						sign.update();						
 					}				
+				}
 					else if (sign.getLine(0).equalsIgnoreCase("§b[§5Klassenserver§b]")) {
 					String routeName = sign.getLine(2);
 					if (RouteManager.exists(routeName)) {
@@ -55,7 +56,6 @@ public class EPlayerInteract implements Listener {
 						
 						player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run " + route.getName() + " betreten!");
 						Inventory inv = player.getInventory();
-						PlayerPlayingManager.add(player.getUniqueId(), route, player.getLocation(), inv);
 						inv.clear();
 						ItemStack stop = new ItemStack(Material.REDSTONE, 1);
 						ItemMeta stopMeta = stop.getItemMeta();
@@ -79,6 +79,7 @@ public class EPlayerInteract implements Listener {
 						inv.setItem(0, backToCheckpoint);
 						player.getInventory().setContents(inv.getContents());
 						player.updateInventory();
+						PlayerPlayingManager.add(player.getUniqueId(), route, player.getLocation(), inv);
 						player.teleport(route.getStart());
 					}
 				}

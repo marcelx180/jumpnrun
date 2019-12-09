@@ -68,7 +68,7 @@ public class PlayerPlayingManager {
 	public static Route getRouteByUUID(UUID playerId) {
         Route returnRoute = null;
         if(exists(playerId)){
-            returnRoute= playerPlayingRoute.get(playerId);
+            returnRoute = playerPlayingRoute.get(playerId);
         }
 		
 		return returnRoute;
