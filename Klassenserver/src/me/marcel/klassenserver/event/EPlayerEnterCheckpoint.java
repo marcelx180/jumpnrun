@@ -6,8 +6,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import me.marcel.klassenserver.Runing.PlayerPlayingManager;
 import me.marcel.klassenserver.route.Route;
@@ -17,8 +18,8 @@ import me.marcel.klassenserver.route.RouteManager;
 public class EPlayerEnterCheckpoint implements Listener {
 
 	@EventHandler
-	public void onEnter(PlayerMoveEvent event) {
-
+	public void onEnter(PlayerEvent event) {
+		
         Player player = event.getPlayer();
         if(PlayerPlayingManager.exists(player.getUniqueId())){
             List<Location> checkpoints = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints();
@@ -34,7 +35,9 @@ public class EPlayerEnterCheckpoint implements Listener {
                     if(checkpoint == 0){
                         player.getInventory().clear();
                         Inventory inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
-                        player.getInventory().setContents(inv.getContents());
+                        for(ItemStack itemin : inv.getContents()) {
+    						player.getInventory().addItem(itemin);
+    					}	
                         player.updateInventory();
                         player.teleport(PlayerPlayingManager.getLocationByUUID(player.getUniqueId()));
                         PlayerPlayingManager.remove(player.getUniqueId());

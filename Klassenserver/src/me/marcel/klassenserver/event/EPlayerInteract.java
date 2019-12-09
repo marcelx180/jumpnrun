@@ -105,7 +105,9 @@ public class EPlayerInteract implements Listener {
 						
 					player.getInventory().clear();
 					Inventory inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
-					player.getInventory().setContents(inv.getContents());
+					for(ItemStack itemin : inv.getContents()) {
+						player.getInventory().addItem(itemin);
+					}					
 					Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
 					player.teleport(signClickedLocation);
 					PlayerPlayingManager.remove(player.getUniqueId());
