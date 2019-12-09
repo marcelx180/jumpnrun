@@ -36,11 +36,14 @@ public class ConfigEditor {
 	}
 	
 	public boolean delete() {
+
 		if (this.getFile().exists()) {
 			this.getFile().deleteOnExit();
 		}
 		
 		return true;
+
+
 	}
 	
 	public boolean update(String path, Object value) {
@@ -51,6 +54,19 @@ public class ConfigEditor {
 			this.getConfig().save(this.getFile());
 		} catch (IOException e) {
 			success = false;
+		}
+		
+		return success;
+	}
+
+	public boolean remove(String path){
+		boolean success = true;
+
+		this.getConfig().set(path, "");
+		try{
+			this.getConfig().save(this.getFile());
+		}catch(IOException e){
+			success=false;
 		}
 		
 		return success;

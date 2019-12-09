@@ -15,6 +15,15 @@ public class RouteManager {
 			routes.add(route);
 		}
 	}
+	public static void remove(String name){
+		if(exists(name)){
+			for(Route route : routes){
+				if(route.getName().equalsIgnoreCase(name)){
+					routes.remove(route);
+				}
+			}
+		}
+	}
 	public static void update(Route route) {
 		for(int i = 0; i < routes.toArray().length ; i++) {
 			if(routes.get(i).getName().equalsIgnoreCase(route.getName())) {

@@ -16,6 +16,8 @@ public class EventManager {
 		register(new ESignChange());
 		register(new EPlayerInteract());
 		register(new EPlayerDisconnect());
+		register(new EPlayerEnterCheckpoint());
+		register(new EPlayerItemDrop());
 	}
 	
 	private static void register(Listener listener) {

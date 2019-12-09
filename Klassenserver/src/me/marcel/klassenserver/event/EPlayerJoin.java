@@ -10,5 +10,4 @@ public class EPlayerJoin implements Listener {
 	public void onJoin(PlayerJoinEvent event) {
 		
 	}
-	
 }
