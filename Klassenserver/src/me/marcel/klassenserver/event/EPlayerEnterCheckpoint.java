@@ -1,5 +1,7 @@
 package me.marcel.klassenserver.event;
 
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,24 +20,28 @@ public class EPlayerEnterCheckpoint implements Listener {
 
         Player player = event.getPlayer();
         if(PlayerPlayingManager.exists(player.getUniqueId())){
-            Location checkpointLocation = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
-            if(player.getLocation().getBlockX() == checkpointLocation.getBlockX() && player.getLocation().getBlockY() == checkpointLocation.getBlockY() && player.getLocation().getBlockZ() == checkpointLocation.getBlockZ() ){
-                Route route = PlayerPlayingManager.getRouteByUUID(player.getUniqueId());
+            List<Location> checkpoints = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints();
+            if(checkpoints.size() > 0){
 
-                Integer maxCheckpoint = RouteManager.getRouteByName(route.getName()).getCheckpoints().size();
-                Integer checkpoint = route.getCheckpoints().size();
-            
-                if(checkpoint == 0){
-                    player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
-                    player.updateInventory();
-                    player.teleport(PlayerPlayingManager.getLocationByUUID(player.getUniqueId()));
-                    PlayerPlayingManager.remove(player.getUniqueId());
-                    player.sendMessage("§b[§5Klassenserver§b] Herzlichen Glückwunsch du hast das Jump'n Run " + route.getName() + "geschafft!");
-                }else{
-                    checkpoint = maxCheckpoint - checkpoint;          
-                    player.sendMessage("§b[§5Klassenserver§b] Du hast Checkpoint §6" + checkpoint.toString() + "§b von §2" + maxCheckpoint.toString() + "§b erreicht");
-                    PlayerPlayingManager.removeCheckpoint(player.getUniqueId());
-                }            
+                Location checkpointLocation = checkpoints.get(0);
+                if(player.getLocation().getBlockX() == checkpointLocation.getBlockX() && player.getLocation().getBlockY() == checkpointLocation.getBlockY() && player.getLocation().getBlockZ() == checkpointLocation.getBlockZ() ){
+                    Route route = PlayerPlayingManager.getRouteByUUID(player.getUniqueId());
+    
+                    Integer maxCheckpoint = RouteManager.getRouteByName(route.getName()).getCheckpoints().size();
+                    Integer checkpoint = route.getCheckpoints().size();
+                
+                    if(checkpoint == 0){
+                        player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
+                        player.updateInventory();
+                        player.teleport(PlayerPlayingManager.getLocationByUUID(player.getUniqueId()));
+                        PlayerPlayingManager.remove(player.getUniqueId());
+                        player.sendMessage("§b[§5Klassenserver§b] Herzlichen Glückwunsch du hast das Jump'n Run " + route.getName() + "geschafft!");
+                    }else{
+                        checkpoint = maxCheckpoint - checkpoint;          
+                        player.sendMessage("§b[§5Klassenserver§b] Du hast Checkpoint §6" + checkpoint.toString() + "§b von §2" + maxCheckpoint.toString() + "§b erreicht");
+                        PlayerPlayingManager.removeCheckpoint(player.getUniqueId());
+                    }            
+                }
             }
         }
 	}	
