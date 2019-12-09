@@ -31,6 +31,8 @@ public class EPlayerEnterCheckpoint implements Listener {
                     Integer checkpoint = route.getCheckpoints().size();
                 
                     if(checkpoint == 0){
+                        player.getInventory().clear();
+                        player.updateInventory();
                         player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
                         player.updateInventory();
                         player.teleport(PlayerPlayingManager.getLocationByUUID(player.getUniqueId()));

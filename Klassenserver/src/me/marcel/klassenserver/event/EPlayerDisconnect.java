@@ -16,6 +16,8 @@ public class EPlayerDisconnect implements Listener {
         public void onDisconnect(PlayerQuitEvent event) {
                 Player player = event.getPlayer();
                 if(PlayerPlayingManager.exists(player.getUniqueId())){
+                        player.getInventory().clear();
+                        player.updateInventory();
                         player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
                         player.updateInventory();
                         Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());

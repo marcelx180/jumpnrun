@@ -93,21 +93,22 @@ public class EPlayerInteract implements Listener {
 			boolean eventItem=true;
 			String item = "";
 			try{
-				item = event.getItem().getItemMeta().getLocalizedName();
+				item = event.getItem().getItemMeta().getDisplayName();
 			}catch(Exception ex){
 				eventItem=false;
 			}
 			if(eventItem){
 
-				} if(item == "Stop" ){
-					
+				} if(item == "§l§4Stop" ){
+					player.getInventory().clear();
+					player.updateInventory();
 					player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
                 	Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
                 	player.teleport(signClickedLocation);
                 	PlayerPlayingManager.remove(player.getUniqueId());
 					player.updateInventory(); 
 			
-				} if(item == "Checkpoint"){
+				} if(item == "§l§6Zurück zum letzen Checkpoint"){
 					Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
 					player.teleport(lastCheckpoint);
 				}
