@@ -107,7 +107,7 @@ public class EPlayerInteract implements Listener {
                 	PlayerPlayingManager.remove(player.getUniqueId());
 					player.updateInventory(); 
 			
-				} if(event.getItem().getItemMeta().getLocalizedName() == "Checkpoint"){
+				} if(item == "Checkpoint"){
 					Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
 					player.teleport(lastCheckpoint);
 				}
