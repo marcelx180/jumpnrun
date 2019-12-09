@@ -100,15 +100,18 @@ public class EPlayerInteract implements Listener {
 			if(eventItem){
 
 				} if(item == "§l§4Stop" ){
+					event.setCancelled(true);
 					player.getInventory().clear();
-					player.updateInventory();
-					player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
-                	Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
+					Inventory inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
+					player.getInventory().setContents(inv.getContents());
+					Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
                 	player.teleport(signClickedLocation);
                 	PlayerPlayingManager.remove(player.getUniqueId());
 					player.updateInventory(); 
+					player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run verlassen");
 			
 				} if(item == "§l§6Zurück zum letzen Checkpoint"){
+					event.setCancelled(true);
 					Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
 					player.teleport(lastCheckpoint);
 				}
