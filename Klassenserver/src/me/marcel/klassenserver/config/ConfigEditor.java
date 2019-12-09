@@ -55,6 +55,19 @@ public class ConfigEditor {
 		
 		return success;
 	}
+
+	public boolean remove(String path){
+		boolean success = true;
+
+		this.getConfig().set(path, "");
+		try{
+			this.getConfig().save(this.getFile());
+		}catch(IOException e){
+			success=false;
+		}
+		
+		return success;
+	}
 	
 	public String getString(String path) {
 		return this.getConfig().getString(path);
