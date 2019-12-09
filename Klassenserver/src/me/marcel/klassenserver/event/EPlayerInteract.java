@@ -38,20 +38,24 @@ public class EPlayerInteract implements Listener {
 					loreExist = false;
 				} 
 				if(loreExist){
+					try {
+						
 					
 						if(lore.get(0).equalsIgnoreCase("§b[§5Klassenserver§b]") && lore.get(1).equalsIgnoreCase("Klicke hiermit auf ein Schild") && lore.get(2).equalsIgnoreCase("und es wird zum Start Schild für das Jump'n Run:")) {				
 							
-						String name = lore.get(3);
-						sign.setLine(0, "§b[§5Klassenserver§b]");
-						sign.setLine(1, "Jump'n Run:");
-						sign.setLine(2, name);
-						sign.setLine(3, "Klicke zum spielen");
+							String name = lore.get(3);
+							sign.setLine(0, "§b[§5Klassenserver§b]");
+							sign.setLine(1, "Jump'n Run:");
+							sign.setLine(2, name);
+							sign.setLine(3, "Klicke zum spielen");
 							
-						sign.update();						
-					}				
+							sign.update();						
+						}
+					} catch (Exception e) {
+					}	
 					
 				}
-					else if (sign.getLine(0).equalsIgnoreCase("§b[§5Klassenserver§b]")) {
+					if (sign.getLine(0).equalsIgnoreCase("§b[§5Klassenserver§b]")) {
 					String routeName = sign.getLine(2);
 					if (RouteManager.exists(routeName)) {
 						Route route = RouteManager.getRouteByName(routeName);
@@ -85,7 +89,7 @@ public class EPlayerInteract implements Listener {
 						player.teleport(route.getStart());
 					}
 				}
-			}else if(event.getItem().getItemMeta().getLocalizedName() == "Stop" ){
+			} if(event.getItem().getItemMeta().getLocalizedName() == "Stop" ){
 					
 				player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
                 Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
@@ -93,7 +97,7 @@ public class EPlayerInteract implements Listener {
                 PlayerPlayingManager.remove(player.getUniqueId());
 				player.updateInventory(); 
 			
-			}else if(event.getItem().getItemMeta().getLocalizedName() == "Checkpoint"){
+			} if(event.getItem().getItemMeta().getLocalizedName() == "Checkpoint"){
 				Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
 				player.teleport(lastCheckpoint);
 			}
