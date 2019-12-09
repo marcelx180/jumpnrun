@@ -92,7 +92,7 @@ public class EPlayerInteract implements Listener {
 			}
 			boolean eventItem=true;
 			try{
-				event.getItem();
+				event.getItem().getItemMeta();
 			}catch(Exception ex){
 				eventItem=false;
 			}
