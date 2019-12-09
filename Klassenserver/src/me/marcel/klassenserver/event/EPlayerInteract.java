@@ -91,14 +91,15 @@ public class EPlayerInteract implements Listener {
 				}
 			}
 			boolean eventItem=true;
+			String item = "";
 			try{
-				event.getItem().getItemMeta().getLocalizedName();
+				item = event.getItem().getItemMeta().getLocalizedName();
 			}catch(Exception ex){
 				eventItem=false;
 			}
 			if(eventItem){
 
-				} if(event.getItem().getItemMeta().getLocalizedName() == "Stop" ){
+				} if(item == "Stop" ){
 					
 					player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
                 	Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
