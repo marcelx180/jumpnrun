@@ -23,11 +23,15 @@ public class CKlassenserver implements CommandExecutor {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			
+
 			 if (args.length == 1) {
+
+	
 				
 				// /ks create (name is missing)
 				if (args[0].equalsIgnoreCase("create")) {
 					player.sendMessage("§8[§aKlassenserver§8] §cFehlender Name!");
+
 				}
 				else if (args[0].equalsIgnoreCase("checkpoint")) {
 					player.sendMessage("§8[§aKlassenserver§8] §cFehlender Name und Checkpoint Identifier!");
@@ -56,6 +60,7 @@ public class CKlassenserver implements CommandExecutor {
 						player.sendMessage("§8[§aKlassenserver§8] §bDas Jump'n Run wurde erstellt!");
 						player.sendMessage("§8[§aKlassenserver§8] §bBitte Start location festlegen: /ks start " + name);
 						
+
 					} else {
 						player.sendMessage("§8[§aKlassenserver§8] §cExistiert bereits!");
 					}
@@ -81,7 +86,7 @@ public class CKlassenserver implements CommandExecutor {
 						player.updateInventory();
 						player.sendMessage("§8[§aKlassenserver§8] §bRechts-klicke mit dem Schild welches du gerade bekommen hast auf ein Schild, welches zum start Schild werden soll !");
 					} else {
-						player.sendMessage("§8[§aKlassenserver§8] §cDas Jump'n Run existiert nicht!");
+
 					}
 				}
 				// //ks start <name>
@@ -104,7 +109,7 @@ public class CKlassenserver implements CommandExecutor {
 						ConfigManager.editor("routes").update(name + ".start.z", z);
 						ConfigManager.editor("routes").update(name + ".start.yaw", yaw);
 						ConfigManager.editor("routes").update(name + ".start.pitch", pitch);
-						
+
 						RouteManager.update(new Route(name, location, RouteManager.getRouteByName(name).getCheckpoints()));
 						
 						player.sendMessage("§8[§aKlassenserver§8] §bDie Startlocation wurde gesetzt!");
@@ -130,7 +135,7 @@ public class CKlassenserver implements CommandExecutor {
 				}
 						
 			
-				
+
 			}else if(args.length==3) {
 				if(args[0].equalsIgnoreCase("checkpoint")) {
 					String name = args[1];
@@ -173,6 +178,7 @@ public class CKlassenserver implements CommandExecutor {
 				player.sendMessage("§8[§aKlassenserver§8] §6/ks start <name>");
 				player.sendMessage("§8[§aKlassenserver§8] §6/ks checkpoint <name> <identifier>");
 				player.sendMessage("§8[§aKlassenserver§8] §6/ks getStartSign <name>");	
+
 			}
 		} else {
 			sender.sendMessage("§8[§aKlassenserver§8] §cDer Befehl kann nur von Spielern genutzt werden!");

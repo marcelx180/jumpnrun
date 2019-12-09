@@ -36,11 +36,14 @@ public class ConfigEditor {
 	}
 	
 	public boolean delete() {
+
 		if (this.getFile().exists()) {
 			this.getFile().deleteOnExit();
 		}
 		
 		return true;
+
+
 	}
 	
 	public boolean update(String path, Object value) {
