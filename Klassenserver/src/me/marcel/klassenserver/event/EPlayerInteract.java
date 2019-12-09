@@ -90,7 +90,13 @@ public class EPlayerInteract implements Listener {
 					}
 				}
 			}
-			if(event.getItem() != null){
+			boolean eventItem=true;
+			try{
+				event.getItem();
+			}catch(Exception ex){
+				eventItem=false;
+			}
+			if(eventItem){
 
 				} if(event.getItem().getItemMeta().getLocalizedName() == "Stop" ){
 					
