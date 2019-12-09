@@ -3,11 +3,9 @@ package me.marcel.klassenserver.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -79,14 +77,14 @@ public class EPlayerInteract implements Listener {
 						checkpointMeta.setLore(checkpointLore);
 						backToCheckpoint.setItemMeta(checkpointMeta);
 						inv.setItem(0, backToCheckpoint);
+						player.getInventory().setContents(inv.getContents());
 						player.updateInventory();
 						player.teleport(route.getStart());
 					}
 				}
 			}else if(event.getItem().getItemMeta().getLocalizedName() == "Stop" ){
 					
-				Inventory invOfPlayer = player.getInventory();
-                invOfPlayer = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
+				player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
                 Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
                 player.teleport(signClickedLocation);
                 PlayerPlayingManager.remove(player.getUniqueId());

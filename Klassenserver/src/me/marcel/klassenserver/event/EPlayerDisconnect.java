@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.Inventory;
 
 import me.marcel.klassenserver.Runing.PlayerPlayingManager;
 
@@ -17,8 +16,8 @@ public class EPlayerDisconnect implements Listener {
         public void onDisconnect(PlayerQuitEvent event) {
                 Player player = event.getPlayer();
                 if(PlayerPlayingManager.exists(player.getUniqueId())){
-                        Inventory invOfPlayer = player.getInventory();
-                        invOfPlayer = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
+                        player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
+                        player.updateInventory();
                         Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
                         player.teleport(signClickedLocation);
                         PlayerPlayingManager.remove(player.getUniqueId());
