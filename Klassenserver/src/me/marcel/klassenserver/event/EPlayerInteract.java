@@ -62,6 +62,7 @@ public class EPlayerInteract implements Listener {
 						
 						player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run " + route.getName() + " betreten!");
 						Inventory inv = player.getInventory();
+						PlayerPlayingManager.add(player.getUniqueId(), route, player.getLocation(), inv);
 						inv.clear();
 						ItemStack stop = new ItemStack(Material.REDSTONE, 1);
 						ItemMeta stopMeta = stop.getItemMeta();
@@ -85,22 +86,24 @@ public class EPlayerInteract implements Listener {
 						inv.setItem(0, backToCheckpoint);
 						player.getInventory().setContents(inv.getContents());
 						player.updateInventory();
-						PlayerPlayingManager.add(player.getUniqueId(), route, player.getLocation(), inv);
 						player.teleport(route.getStart());
 					}
 				}
 			}
-			} if(event.getItem().getItemMeta().getLocalizedName() == "Stop" ){
+			if(event.getItem() != null){
+
+				} if(event.getItem().getItemMeta().getLocalizedName() == "Stop" ){
 					
-				player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
-                Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
-                player.teleport(signClickedLocation);
-                PlayerPlayingManager.remove(player.getUniqueId());
-				player.updateInventory(); 
+					player.getInventory().setContents(PlayerPlayingManager.getInventoryByUUID(player.getUniqueId()).getContents());
+                	Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
+                	player.teleport(signClickedLocation);
+                	PlayerPlayingManager.remove(player.getUniqueId());
+					player.updateInventory(); 
 			
-			} if(event.getItem().getItemMeta().getLocalizedName() == "Checkpoint"){
-				Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
-				player.teleport(lastCheckpoint);
+				} if(event.getItem().getItemMeta().getLocalizedName() == "Checkpoint"){
+					Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
+					player.teleport(lastCheckpoint);
+				}
 			}
 		}
 	}
