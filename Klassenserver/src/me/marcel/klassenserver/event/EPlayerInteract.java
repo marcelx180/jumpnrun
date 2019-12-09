@@ -38,18 +38,18 @@ public class EPlayerInteract implements Listener {
 					loreExist = false;
 				} 
 				if(loreExist){
-					if(lore.toArray().length == 4 ){
+					
 						if(lore.get(0).equalsIgnoreCase("§b[§5Klassenserver§b]") && lore.get(1).equalsIgnoreCase("Klicke hiermit auf ein Schild") && lore.get(2).equalsIgnoreCase("und es wird zum Start Schild für das Jump'n Run:")) {				
 							
-							String name = lore.get(3);
-							sign.setLine(0, "§b[§5Klassenserver§b]");
-							sign.setLine(1, "Jump'n Run:");
-							sign.setLine(2, name);
-							sign.setLine(3, "Klicke zum spielen");
+						String name = lore.get(3);
+						sign.setLine(0, "§b[§5Klassenserver§b]");
+						sign.setLine(1, "Jump'n Run:");
+						sign.setLine(2, name);
+						sign.setLine(3, "Klicke zum spielen");
 							
-							sign.update();						
-						}				
-					}
+						sign.update();						
+					}				
+					
 				}
 					else if (sign.getLine(0).equalsIgnoreCase("§b[§5Klassenserver§b]")) {
 					String routeName = sign.getLine(2);
