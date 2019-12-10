@@ -14,6 +14,9 @@ public class Route {
 		this.name = name;
 		this.start = start;
 		this.checkpoints = checkpoints;
+	}
+	
+	public void managerAdd() {
 		RouteManager.add(this);
 	}
 	

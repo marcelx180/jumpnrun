@@ -56,7 +56,8 @@ public class CKlassenserver implements CommandExecutor {
 						routes.add(name);
 						
 						ConfigManager.editor("routes").update("routes", routes);
-						new Route(name, null, new ArrayList<Location>());
+						Route route = new Route(name, null, new ArrayList<Location>());
+						route.managerAdd();
 						player.sendMessage("§8[§aKlassenserver§8] §bDas Jump'n Run wurde erstellt!");
 						player.sendMessage("§8[§aKlassenserver§8] §bBitte Start location festlegen: /ks start " + name);
 						

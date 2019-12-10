@@ -31,7 +31,7 @@ public class EPlayerEnterCheckpoint implements Listener {
                     Integer maxCheckpoint = RouteManager.getRouteByName(route.getName()).getCheckpoints().size();
                     Integer checkpoint = route.getCheckpoints().size();
                 
-                    if(checkpoint == 0){
+                    if(checkpoint == 1){
                         player.getInventory().clear();
                         ItemStack[] inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
 					    player.getInventory().setContents(inv);		

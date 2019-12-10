@@ -19,7 +19,7 @@ public class EPlayerDisconnect implements Listener {
                 if(PlayerPlayingManager.exists(player.getUniqueId())){
                         player.getInventory().clear();
                         ItemStack[] inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
-	                player.getInventory().setContents(inv);		
+                        player.getInventory().setContents(inv);		
                         player.updateInventory();
                         Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
                         player.teleport(signClickedLocation);
