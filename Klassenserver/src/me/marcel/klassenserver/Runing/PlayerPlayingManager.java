@@ -52,7 +52,7 @@ public class PlayerPlayingManager {
     }
 
     public static void removeCheckpoint(UUID playerID) {
-		if (!(exists(playerID))) {
+		if (exists(playerID)) {
             Route route = playerPlayingRoute.get(playerID);
             List<Location> checkpoints = route.getCheckpoints();
             checkpoints.remove(checkpoints.get(0));

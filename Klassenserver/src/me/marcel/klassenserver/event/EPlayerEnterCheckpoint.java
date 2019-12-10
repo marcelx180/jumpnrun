@@ -40,7 +40,7 @@ public class EPlayerEnterCheckpoint implements Listener {
                         PlayerPlayingManager.remove(player.getUniqueId());
                         player.sendMessage("§b[§5Klassenserver§b] Herzlichen Glückwunsch du hast das Jump'n Run " + route.getName() + "geschafft!");
                     }else{
-                        checkpoint = maxCheckpoint - checkpoint;          
+                        checkpoint = (maxCheckpoint - checkpoint) + 1;          
                         player.sendMessage("§b[§5Klassenserver§b] Du hast Checkpoint §6" + checkpoint.toString() + "§b von §2" + maxCheckpoint.toString() + "§b erreicht");
                         PlayerPlayingManager.setLastCheckpoint(player.getUniqueId(), checkpointLocation);
                         PlayerPlayingManager.removeCheckpoint(player.getUniqueId());
