@@ -14,9 +14,11 @@ public class PlayerPlayingManager {
     private static HashMap<UUID, Route> playerPlayingRoute = new HashMap<UUID, Route>();
     private static HashMap<UUID, Location> playerInitialLocation = new HashMap<UUID, Location>();
     private static HashMap<UUID, ItemStack[]> playerInventory = new HashMap<UUID, ItemStack[]>();
-	
+    private static HashMap<UUID, Location> lastCheckpoint = new HashMap<UUID, Location>();
+
 	public static void add(UUID playerID, Route route, Location location, ItemStack[] inventory) {
 		if (!(exists(playerID))) {
+			lastCheckpoint.put(playerID, route.getStart());
             playerPlayingRoute.put(playerID, route);
             playerInitialLocation.put(playerID, location);
             playerInventory.put(playerID, inventory);
@@ -33,6 +35,21 @@ public class PlayerPlayingManager {
        }
        return returnExist;
     }
+    
+    public static void setLastCheckpoint(UUID playerID, Location checkpoint) {
+    	if(exists(playerID)) {
+    		lastCheckpoint.remove(playerID);
+    		lastCheckpoint.put(playerID, checkpoint);
+    	}
+    }
+    
+    public static Location getLastCheckpoint(UUID playerID) {
+    	Location returnCheckpoint = null;
+    	if(exists(playerID)) {
+    		returnCheckpoint = lastCheckpoint.get(playerID);
+    	}
+    	return returnCheckpoint;
+    }
 
     public static void removeCheckpoint(UUID playerID) {
 		if (!(exists(playerID))) {
@@ -47,6 +64,7 @@ public class PlayerPlayingManager {
 
     public static void remove(UUID playerID) {
 		if (exists(playerID)) {
+			lastCheckpoint.remove(playerID);
             playerPlayingRoute.remove(playerID);
             playerInitialLocation.remove(playerID);
             playerInventory.remove(playerID);

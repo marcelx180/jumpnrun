@@ -24,7 +24,7 @@ public class EPlayerEnterCheckpoint implements Listener {
             List<Location> checkpoints = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints();
             
             if(checkpoints.size() > 0){
-            	Location checkpointLocation = checkpoints.get(1);
+            	Location checkpointLocation = checkpoints.get(0);
                 if(player.getLocation().getBlockX() == checkpointLocation.getBlockX() && player.getLocation().getBlockY() == checkpointLocation.getBlockY() && player.getLocation().getBlockZ() == checkpointLocation.getBlockZ() ){
                     Route route = PlayerPlayingManager.getRouteByUUID(player.getUniqueId());
     
@@ -42,6 +42,7 @@ public class EPlayerEnterCheckpoint implements Listener {
                     }else{
                         checkpoint = maxCheckpoint - checkpoint;          
                         player.sendMessage("§b[§5Klassenserver§b] Du hast Checkpoint §6" + checkpoint.toString() + "§b von §2" + maxCheckpoint.toString() + "§b erreicht");
+                        PlayerPlayingManager.setLastCheckpoint(player.getUniqueId(), checkpointLocation);
                         PlayerPlayingManager.removeCheckpoint(player.getUniqueId());
                     }            
                 }

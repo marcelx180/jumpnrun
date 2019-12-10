@@ -114,7 +114,7 @@ public class EPlayerInteract implements Listener {
 					event.setCancelled(true);
 				} if(item == Material.BLAZE_ROD){
 						
-					Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
+					Location lastCheckpoint = PlayerPlayingManager.getLastCheckpoint(player.getUniqueId());
 					player.teleport(lastCheckpoint);
 					event.setCancelled(true);
 					}
