@@ -62,7 +62,13 @@ public class EPlayerInteract implements Listener {
 						
 					player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run " + route.getName() + " betreten!");
 					Inventory inv = player.getInventory();
-					PlayerPlayingManager.add(player.getUniqueId(), new Route(route.getName(), route.getStart(), route.getCheckpoints()), player.getLocation(), inv.getContents());
+					List<Location> checkpoints = new ArrayList<Location>();
+					for(Location loc : route.getCheckpoints())
+					{
+						checkpoints.add(loc);
+					}
+					
+					PlayerPlayingManager.add(player.getUniqueId(), route.getStart().clone(), checkpoints, player.getLocation().clone(), inv.getContents().clone(), route.getName());
 					inv.clear();
 					ItemStack stop = new ItemStack(Material.REDSTONE, 1);
 					ItemMeta stopMeta = stop.getItemMeta();

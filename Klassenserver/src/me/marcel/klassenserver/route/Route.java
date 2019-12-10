@@ -31,6 +31,5 @@ public class Route {
 	public List<Location> getCheckpoints() {
 		return checkpoints;
 	}
-
 	
 }

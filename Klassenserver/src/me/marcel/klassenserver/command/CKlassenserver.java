@@ -122,7 +122,7 @@ public class CKlassenserver implements CommandExecutor {
 				}else if(args[0].equalsIgnoreCase("delete")){
 					String name = args[1];
 					if (RouteManager.exists(name)) {
-						if(PlayerPlayingManager.anyInRun(name)){
+						if(PlayerPlayingManager.anyInRun()){
 							player.sendMessage("§8[§aKlassenserver§8] §cDas Jump'n Run wird noch benutzt!");
 						}else{
 							RouteManager.remove(name);

@@ -10,7 +10,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.marcel.klassenserver.Runing.PlayerPlayingManager;
-import me.marcel.klassenserver.route.Route;
 import me.marcel.klassenserver.route.RouteManager;
 
 
@@ -21,14 +20,14 @@ public class EPlayerEnterCheckpoint implements Listener {
 		
         Player player = event.getPlayer();
         if(PlayerPlayingManager.exists(player.getUniqueId())){
-            List<Location> checkpoints = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints();
+            List<Location> checkpoints = PlayerPlayingManager.getCheckpointsByUUID(player.getUniqueId());
             
             if(checkpoints.size() > 0){
             	Location checkpointLocation = checkpoints.get(0);
                 if(player.getLocation().getBlockX() == checkpointLocation.getBlockX() && player.getLocation().getBlockY() == checkpointLocation.getBlockY() && player.getLocation().getBlockZ() == checkpointLocation.getBlockZ() ){
-                    Route route = PlayerPlayingManager.getRouteByUUID(player.getUniqueId());
+                    
     
-                    Integer maxCheckpoint = RouteManager.getRouteByName(route.getName()).getCheckpoints().size();
+                    Integer maxCheckpoint = RouteManager.getRouteByName(PlayerPlayingManager.getRouteName(player.getUniqueId())).getCheckpoints().size();
                     Integer checkpoint = checkpoints.size();
                 
                     if(checkpoint == 1){
@@ -38,7 +37,7 @@ public class EPlayerEnterCheckpoint implements Listener {
                         player.updateInventory();
                         player.teleport(PlayerPlayingManager.getLocationByUUID(player.getUniqueId()));
                         PlayerPlayingManager.remove(player.getUniqueId());
-                        player.sendMessage("§b[§5Klassenserver§b] Herzlichen Glückwunsch du hast das Jump'n Run " + route.getName() + "geschafft!");
+                        player.sendMessage("§b[§5Klassenserver§b] Herzlichen Glückwunsch du hast das Jump'n Run " + PlayerPlayingManager.getRouteName(player.getUniqueId()) + "geschafft!");
                     }else{
                         checkpoint = (maxCheckpoint - checkpoint) + 1;          
                         player.sendMessage("§b[§5Klassenserver§b] Du hast Checkpoint §6" + checkpoint.toString() + "§b von §2" + maxCheckpoint.toString() + "§b erreicht");
