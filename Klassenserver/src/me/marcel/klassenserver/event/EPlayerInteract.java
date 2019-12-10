@@ -62,7 +62,7 @@ public class EPlayerInteract implements Listener {
 						
 					player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run " + route.getName() + " betreten!");
 					Inventory inv = player.getInventory();
-					PlayerPlayingManager.add(player.getUniqueId(), route, player.getLocation(), inv.getContents());
+					PlayerPlayingManager.add(player.getUniqueId(), new Route(route.getName(), route.getStart(), route.getCheckpoints()), player.getLocation(), inv.getContents());
 					inv.clear();
 					ItemStack stop = new ItemStack(Material.REDSTONE, 1);
 					ItemMeta stopMeta = stop.getItemMeta();

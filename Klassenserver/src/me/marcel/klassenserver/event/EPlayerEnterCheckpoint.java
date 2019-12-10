@@ -29,7 +29,7 @@ public class EPlayerEnterCheckpoint implements Listener {
                     Route route = PlayerPlayingManager.getRouteByUUID(player.getUniqueId());
     
                     Integer maxCheckpoint = RouteManager.getRouteByName(route.getName()).getCheckpoints().size();
-                    Integer checkpoint = route.getCheckpoints().size();
+                    Integer checkpoint = checkpoints.size();
                 
                     if(checkpoint == 1){
                         player.getInventory().clear();
