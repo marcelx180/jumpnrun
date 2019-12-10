@@ -56,7 +56,8 @@ public class CKlassenserver implements CommandExecutor {
 						routes.add(name);
 						
 						ConfigManager.editor("routes").update("routes", routes);
-						new Route(name, null, new ArrayList<Location>());
+						Route route = new Route(name, null, new ArrayList<Location>());
+						route.managerAdd();
 						player.sendMessage("§8[§aKlassenserver§8] §bDas Jump'n Run wurde erstellt!");
 						player.sendMessage("§8[§aKlassenserver§8] §bBitte Start location festlegen: /ks start " + name);
 						
@@ -121,7 +122,7 @@ public class CKlassenserver implements CommandExecutor {
 				}else if(args[0].equalsIgnoreCase("delete")){
 					String name = args[1];
 					if (RouteManager.exists(name)) {
-						if(PlayerPlayingManager.anyInRun(name)){
+						if(PlayerPlayingManager.anyInRun()){
 							player.sendMessage("§8[§aKlassenserver§8] §cDas Jump'n Run wird noch benutzt!");
 						}else{
 							RouteManager.remove(name);
@@ -144,6 +145,10 @@ public class CKlassenserver implements CommandExecutor {
 								String checkpoint = args[2];
 								Location location = player.getLocation();
 						
+								List<String> checkpoints = ConfigManager.editor("routes").getStringList(name + ".checkpoints");
+								checkpoints.add(checkpoint);
+								ConfigManager.editor("routes").update(name + ".checkpoints", checkpoints);
+
 								String world = location.getWorld().getName();
 								double x = location.getX();
 								double y = location.getY();
@@ -151,17 +156,17 @@ public class CKlassenserver implements CommandExecutor {
 								float yaw = location.getYaw();
 								float pitch = location.getPitch();
 						
-								ConfigManager.editor("routes").update(name + ".checkpoints."+checkpoint+".world", world);
-								ConfigManager.editor("routes").update(name + ".checkpoints."+checkpoint+".x", x);
-								ConfigManager.editor("routes").update(name + ".checkpoints."+checkpoint+".y", y);
-								ConfigManager.editor("routes").update(name + ".checkpoints."+checkpoint+".z", z);
-								ConfigManager.editor("routes").update(name + ".checkpoints."+checkpoint+".yaw", yaw);
-								ConfigManager.editor("routes").update(name + ".checkpoints."+checkpoint+".pitch", pitch);
+								ConfigManager.editor("routes").update(name + ".checkpoint."+checkpoint+".world", world);
+								ConfigManager.editor("routes").update(name + ".checkpoint."+checkpoint+".x", x);
+								ConfigManager.editor("routes").update(name + ".checkpoint."+checkpoint+".y", y);
+								ConfigManager.editor("routes").update(name + ".checkpoint."+checkpoint+".z", z);
+								ConfigManager.editor("routes").update(name + ".checkpoint."+checkpoint+".yaw", yaw);
+								ConfigManager.editor("routes").update(name + ".checkpoint."+checkpoint+".pitch", pitch);
 								
-								List<Location> checkpoints = RouteManager.getRouteByName(name).getCheckpoints();
-								checkpoints.add(location);
+								List<Location> checkpointer = RouteManager.getRouteByName(name).getCheckpoints();
+								checkpointer.add(location);
 								
-								RouteManager.update(new Route(name, RouteManager.getRouteByName(name).getStart(), checkpoints));
+								RouteManager.update(new Route(name, RouteManager.getRouteByName(name).getStart(), checkpointer));
 								
 								player.sendMessage("§8[§aKlassenserver§8] §bDer Checkpoint "+checkpoint+" wurde hinzugefügt");
 							}else {

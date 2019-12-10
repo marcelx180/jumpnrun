@@ -62,7 +62,13 @@ public class EPlayerInteract implements Listener {
 						
 					player.sendMessage("§8[§aKlassenserver§8] §c Du hast das Jump'n Run " + route.getName() + " betreten!");
 					Inventory inv = player.getInventory();
-					PlayerPlayingManager.add(player.getUniqueId(), route, player.getLocation(), inv);
+					List<Location> checkpoints = new ArrayList<Location>();
+					for(Location loc : route.getCheckpoints())
+					{
+						checkpoints.add(loc);
+					}
+					
+					PlayerPlayingManager.add(player.getUniqueId(), route.getStart().clone(), checkpoints, player.getLocation().clone(), inv.getContents().clone(), route.getName());
 					inv.clear();
 					ItemStack stop = new ItemStack(Material.REDSTONE, 1);
 					ItemMeta stopMeta = stop.getItemMeta();
@@ -104,10 +110,8 @@ public class EPlayerInteract implements Listener {
 				if(item == Material.REDSTONE ){
 						
 					player.getInventory().clear();
-					Inventory inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
-					for(ItemStack itemin : inv.getContents()) {
-						player.getInventory().addItem(itemin);
-					}					
+					ItemStack[] inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
+					player.getInventory().setContents(inv);				
 					Location signClickedLocation = PlayerPlayingManager.getLocationByUUID(player.getUniqueId());
 					player.teleport(signClickedLocation);
 					PlayerPlayingManager.remove(player.getUniqueId());
@@ -116,7 +120,7 @@ public class EPlayerInteract implements Listener {
 					event.setCancelled(true);
 				} if(item == Material.BLAZE_ROD){
 						
-					Location lastCheckpoint = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints().get(0);
+					Location lastCheckpoint = PlayerPlayingManager.getLastCheckpoint(player.getUniqueId());
 					player.teleport(lastCheckpoint);
 					event.setCancelled(true);
 					}
