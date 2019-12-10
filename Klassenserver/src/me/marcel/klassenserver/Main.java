@@ -28,7 +28,7 @@ public class Main extends JavaPlugin {
 		RouteManager.loadRoutes();
 		
 		// Logging
-		Bukkit.getConsoleSender().sendMessage("§8[§aKlassenserver§8] §bDas Plugin wurde aktiviert");
+		Bukkit.getConsoleSender().sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§bDas Plugin wurde aktiviert");
 		
 	}
 	
@@ -36,7 +36,7 @@ public class Main extends JavaPlugin {
 	public void onDisable() {
 	
 		// Logging
-		Bukkit.getConsoleSender().sendMessage("§8[§aKlassenserver§8] §bDas Plugin wurde deaktiviert");
+		Bukkit.getConsoleSender().sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§bDas Plugin wurde deaktiviert");
 		
 	}
 	

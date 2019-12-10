@@ -16,17 +16,17 @@ public class ESignChange implements Listener {
 		if (event.getLine(0).equalsIgnoreCase("klassenserver") || event.getLine(0).equalsIgnoreCase("ks")) {
 			if (!(event.getLine(2) == null || event.getLine(2).equalsIgnoreCase(""))) {
 				if (RouteManager.exists(event.getLine(2))) {
-					event.setLine(0, "§b[§5Klassenserver§b]");
-					event.setLine(1, "");
+					event.setLine(0, "Â§b[Â§5KlassenserverÂ§b]");
+					event.setLine(1, "Jump'n Run:");
 					event.setLine(2, event.getLine(2));
-					event.setLine(3, "");
+					event.setLine(3, "Klicke zum spielen");
 				} else {
-					event.setLine(0, "§cNicht gefunden!");
-					player.sendMessage("§8[§aKlassenserver§8] §cDas angegebene JumpNRun existiert nicht!");
+					event.setLine(0, "Â§cNicht gefunden!");
+					player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cDas angegebene JumpNRun existiert nicht!");
 				}
 			} else {
-				event.setLine(0, "§cFehlender Name!");
-				player.sendMessage("§8[§aKlassenserver§8] §cFehlender Name!");
+				event.setLine(0, "Â§cFehlender Name!");
+				player.sendMessage("Â§8[Â§aKlassenserverÂ§8] Â§cFehlender Name!");
 			}
 		}
 		
