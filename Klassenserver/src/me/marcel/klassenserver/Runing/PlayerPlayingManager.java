@@ -46,7 +46,7 @@ public class PlayerPlayingManager {
 	}
 
     public static void remove(UUID playerID) {
-		if (!(exists(playerID))) {
+		if (exists(playerID)) {
             playerPlayingRoute.remove(playerID);
             playerInitialLocation.remove(playerID);
             playerInventory.remove(playerID);

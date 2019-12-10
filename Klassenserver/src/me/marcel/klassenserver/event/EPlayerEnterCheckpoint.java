@@ -22,6 +22,7 @@ public class EPlayerEnterCheckpoint implements Listener {
         Player player = event.getPlayer();
         if(PlayerPlayingManager.exists(player.getUniqueId())){
             List<Location> checkpoints = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints();
+            
             if(checkpoints.size() > 0){
             	Location checkpointLocation = checkpoints.get(1);
                 if(player.getLocation().getBlockX() == checkpointLocation.getBlockX() && player.getLocation().getBlockY() == checkpointLocation.getBlockY() && player.getLocation().getBlockZ() == checkpointLocation.getBlockZ() ){
