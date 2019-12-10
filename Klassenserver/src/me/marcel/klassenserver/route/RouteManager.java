@@ -61,7 +61,8 @@ public class RouteManager {
 				List<Location> checkpoints = ConfigManager.editor("routes").getCheckpoints(route + ".checkpoints", route + ".checkpoint"); 
 				Location start = ConfigManager.editor("routes").getLocation(route +".start");			
 				
-				new Route(route, start, checkpoints);
+				Route load = new Route(route, start, checkpoints);
+				load.managerAdd();
 				
 			} else {
 				// Location nicht vollständig
