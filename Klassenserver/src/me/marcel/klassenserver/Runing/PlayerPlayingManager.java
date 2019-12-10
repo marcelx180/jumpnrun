@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import org.bukkit.Location;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import me.marcel.klassenserver.route.Route;
 
@@ -13,9 +13,9 @@ public class PlayerPlayingManager {
 
     private static HashMap<UUID, Route> playerPlayingRoute = new HashMap<UUID, Route>();
     private static HashMap<UUID, Location> playerInitialLocation = new HashMap<UUID, Location>();
-    private static HashMap<UUID, Inventory> playerInventory = new HashMap<UUID, Inventory>();
+    private static HashMap<UUID, ItemStack[]> playerInventory = new HashMap<UUID, ItemStack[]>();
 	
-	public static void add(UUID playerID, Route route, Location location, Inventory inventory) {
+	public static void add(UUID playerID, Route route, Location location, ItemStack[] inventory) {
 		if (!(exists(playerID))) {
             playerPlayingRoute.put(playerID, route);
             playerInitialLocation.put(playerID, location);
@@ -83,8 +83,8 @@ public class PlayerPlayingManager {
 		return returnLocation;
     }
     
-    public static Inventory getInventoryByUUID(UUID playerId) {
-        Inventory returnInventory = null;
+    public static ItemStack[] getInventoryByUUID(UUID playerId) {
+        ItemStack[] returnInventory = null;
         if(exists(playerId)){
             returnInventory= playerInventory.get(playerId);
         }

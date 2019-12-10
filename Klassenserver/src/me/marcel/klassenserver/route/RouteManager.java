@@ -58,7 +58,7 @@ public class RouteManager {
 		for (String route : ConfigManager.editor("routes").getStringList("routes")) {
 			if (!(ConfigManager.editor("routes").getString(route + ".start.world") == null)) {
 				
-				List<Location> checkpoints = ConfigManager.editor("routes").getCheckpoints(route + ".checkpoints"); 
+				List<Location> checkpoints = ConfigManager.editor("routes").getCheckpoints(route + ".checkpoints", route + ".checkpoint"); 
 				Location start = ConfigManager.editor("routes").getLocation(route +".start");			
 				
 				new Route(route, start, checkpoints);

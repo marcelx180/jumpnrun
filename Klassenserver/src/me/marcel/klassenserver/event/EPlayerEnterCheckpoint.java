@@ -24,7 +24,7 @@ public class EPlayerEnterCheckpoint implements Listener {
         if(PlayerPlayingManager.exists(player.getUniqueId())){
             List<Location> checkpoints = PlayerPlayingManager.getRouteByUUID(player.getUniqueId()).getCheckpoints();
             if(checkpoints.size() > 0){
-            	Location checkpointLocation = checkpoints.get(0);
+            	Location checkpointLocation = checkpoints.get(1);
                 if(player.getLocation().getBlockX() == checkpointLocation.getBlockX() && player.getLocation().getBlockY() == checkpointLocation.getBlockY() && player.getLocation().getBlockZ() == checkpointLocation.getBlockZ() ){
                     Route route = PlayerPlayingManager.getRouteByUUID(player.getUniqueId());
     
@@ -33,10 +33,8 @@ public class EPlayerEnterCheckpoint implements Listener {
                 
                     if(checkpoint == 0){
                         player.getInventory().clear();
-                        Inventory inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
-                        for(ItemStack itemin : inv.getContents()) {
-    						player.getInventory().addItem(itemin);
-    					}	
+                        ItemStack[] inv = PlayerPlayingManager.getInventoryByUUID(player.getUniqueId());
+					    player.getInventory().setContents(inv);		
                         player.updateInventory();
                         player.teleport(PlayerPlayingManager.getLocationByUUID(player.getUniqueId()));
                         PlayerPlayingManager.remove(player.getUniqueId());
